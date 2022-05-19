@@ -1,0 +1,7 @@
+{
+  "batch_size": 32,
+  "LR": 2e-05,
+  "train_path": "../data/train3.csv",
+  "valid_path": "../data/valid.csv",
+  "epochs": 32
+}
