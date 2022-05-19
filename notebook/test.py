@@ -32,7 +32,7 @@ def model_init():
 
 
 def data_init():
-    df_train = pd.read_csv('../data/train.csv')
+    df_train = pd.read_csv('../data/train2.csv')
     df_valid = pd.read_csv('../data/valid.csv')
     training_set = Intents(df_train)
     testing_set = Intents(df_valid)
@@ -171,6 +171,7 @@ def prediction(model, testing_loader, info_name):
     outputs = []
     lst_prediction = []
     lst_true = []
+    lst_class = ['unsustainable', 'sustainable']
     model.eval()
     for sent, label in testing_loader:
         sent = sent.squeeze(1)
@@ -182,18 +183,20 @@ def prediction(model, testing_loader, info_name):
             output = model(sent)[0]
             outputs.append(output)
             _, pred_label = torch.max(output.data, 1)
-            prediction = list(label_to_inx.keys())[pred_label]
-            lst_prediction.append(prediction)
+            # prediction = list(label_to_inx.keys())[pred_label]
+            # predicted = [lst_class[int(pred)] for pred in pred_label]
+            lst_prediction.append(pred_label)
     outputs = [o.to('cpu').detach().numpy().copy() for o in outputs]
-    lst_class = ['unsustainable', 'sustainable']
 
-    predictions2 = []
-    [predictions2.append([x[1] for x in [sorted(zip(example[0], lst_class), reverse=True)][0]]) for example in outputs]
+    # predictions2 = []
+    # [predictions2.append([x[1] for x in [sorted(zip(example[0], lst_class), reverse=True)][0]]) for example in outputs]
 
-    predictions3 = [a[0] for a in predictions2]
-    lst_true = list(df_valid['label'])
+    # predictions3 = [a[0] for a in predictions2]
+    # lst_true = list(df_valid['label'])
+    lst_true = [int(i) for l in lst_true for i in l]
+    lst_prediction = [int(i) for l in lst_prediction for i in l]
 
-    acc, f1_micro, f1_macro = get_result(predictions3, lst_true)
+    acc, f1_micro, f1_macro = get_result(lst_prediction, lst_true)
     print(f"acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
 
 
@@ -210,4 +213,4 @@ if __name__ == "__main__":
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
 
     train(model, 30, optimizer, training_loader, info_name)
-    prediction(model, testing_loader)
+    prediction(model, testing_loader, info_name)
