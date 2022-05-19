@@ -31,13 +31,13 @@ def model_init():
     return model, tokenizer
 
 
-def data_init():
-    df_train = pd.read_csv('../data/train2.csv')
-    df_valid = pd.read_csv('../data/valid.csv')
+def data_init(train_path, valid_path, batch_size):
+    df_train = pd.read_csv(train_path)
+    df_valid = pd.read_csv(valid_path)
     training_set = Intents(df_train)
     testing_set = Intents(df_valid)
 
-    params = {'batch_size': 64,
+    params = {'batch_size': batch_size,
               'shuffle': True,
               'drop_last': False,
               'num_workers': 0}
@@ -46,7 +46,7 @@ def data_init():
     return training_loader, testing_loader
 
 
-def prepare_features(seq_1, max_seq_length=140, zero_pad=True, include_CLS_token=True, include_SEP_token=True):
+def prepare_features(seq_1, max_seq_length=128, zero_pad=True, include_CLS_token=True, include_SEP_token=True):
     # Tokenzine Input
     tokens_a = tokenizer.tokenize(seq_1)
 
@@ -108,6 +108,14 @@ def cache_info(out_file, text):
     print(text)
     with open(out_file, mode="a+") as f:
         f.writelines(text + '\n')
+
+
+def save_config(config, info_name):
+    """Save model Super params"""
+    final_file = os.path.join("../document/config", info_name + ".json")
+    with open(final_file, mode='w') as f:
+        json.dump(config, f, indent=2)
+    print("Config saved!")
 
 
 def train(model, epochs, optimizer, training_loader, info_name):
@@ -197,20 +205,26 @@ def prediction(model, testing_loader, info_name):
     lst_prediction = [int(i) for l in lst_prediction for i in l]
 
     acc, f1_micro, f1_macro = get_result(lst_prediction, lst_true)
-    print(f"acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
+    cache_info(final_file, f"acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
 
 
 if __name__ == "__main__":
+    params = {
+        "batch_size": 16,
+        "LR": 1e-05,
+        "train_path": '../data/train2.csv',
+        "valid_path": '../data/valid.csv',
+        "epochs": 32
+    }
+    info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
     label_to_inx = {'unsustainable': 0, 'sustainable': 1}
 
     model, tokenizer = model_init()
-    training_loader, testing_loader = data_init()
+    training_loader, testing_loader = data_init(params["train_path"], params["valid_path"], params["batch_size"])
 
     loss_function = nn.CrossEntropyLoss()
-    learning_rate = 1e-05
-    optimizer = optim.Adam(params=model.parameters(), lr=learning_rate)
+    optimizer = optim.Adam(params=model.parameters(), lr=params["LR"])
 
-    info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
-
-    train(model, 30, optimizer, training_loader, info_name)
+    save_config(params, info_name)
+    train(model, params["epochs"], optimizer, training_loader, info_name)
     prediction(model, testing_loader, info_name)
