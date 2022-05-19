@@ -1,0 +1,66 @@
+
+EPOCH -- 0
+Iteration: 0, Loss: 0.6932219862937927, Acc: 52.6315803527832
+
+EPOCH -- 1
+
+EPOCH -- 2
+
+EPOCH -- 3
+
+EPOCH -- 4
+
+EPOCH -- 5
+
+EPOCH -- 6
+
+EPOCH -- 7
+
+EPOCH -- 8
+
+EPOCH -- 9
+
+EPOCH -- 10
+
+EPOCH -- 11
+
+EPOCH -- 12
+
+EPOCH -- 13
+
+EPOCH -- 14
+
+EPOCH -- 15
+
+EPOCH -- 16
+
+EPOCH -- 17
+
+EPOCH -- 18
+
+EPOCH -- 19
+
+EPOCH -- 20
+
+EPOCH -- 21
+
+EPOCH -- 22
+
+EPOCH -- 23
+
+EPOCH -- 24
+
+EPOCH -- 25
+
+EPOCH -- 26
+
+EPOCH -- 27
+
+EPOCH -- 28
+
+EPOCH -- 29
+
+EPOCH -- 30
+
+EPOCH -- 31
+Total train time: 00:15

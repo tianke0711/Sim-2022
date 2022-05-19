@@ -112,7 +112,7 @@ def cache_info(out_file, text):
 
 def save_config(config, info_name):
     """Save model Super params"""
-    final_file = os.path.join("../document/config", info_name + ".json")
+    final_file = os.path.join("../document/config", info_name + "-config.json")
     with open(final_file, mode='w') as f:
         json.dump(config, f, indent=2)
     print("Config saved!")
@@ -146,6 +146,7 @@ def train(model, epochs, optimizer, training_loader, info_name):
             optimizer.step()
 
             if min_loss > loss.item():
+                repeat = 0
                 min_loss = loss.item()
 
                 output_dir = "../document/model"
@@ -210,9 +211,9 @@ def prediction(model, testing_loader, info_name):
 
 if __name__ == "__main__":
     params = {
-        "batch_size": 16,
+        "batch_size": 32,
         "LR": 1e-05,
-        "train_path": '../data/train2.csv',
+        "train_path": '../data/train.csv',
         "valid_path": '../data/valid.csv',
         "epochs": 32
     }
