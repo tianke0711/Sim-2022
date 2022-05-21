@@ -20,10 +20,13 @@ from transformers import RobertaForSequenceClassification, RobertaConfig, get_li
 from transformers.utils.notebook import format_time
 from transformers.modeling_outputs import SequenceClassifierOutput
 from transformers import AlbertTokenizer, AlbertModel, AlbertPreTrainedModel, AlbertConfig, AlbertForPreTraining
+from transformers import logging
 
 # my file
 from process_file import InputDataSet, TestInput
 from prediction import my_prediction
+
+logging.set_verbosity_error()
 
 
 class ALBertForSeq(AlbertPreTrainedModel):
@@ -288,11 +291,11 @@ def evaluate(model, val_iter, choice):
 if __name__ == "__main__":
     # init params section
     params = {
-        "batch_size": 1,
+        "batch_size": 32,
         "LR": 1e-05,
         "train_path": '../data/train_idx.csv',
         "valid_path": '../data/valid_idx.csv',
-        "epochs": 10,
+        "epochs": 3,
         "choice": 'ALBERT'
     }
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
