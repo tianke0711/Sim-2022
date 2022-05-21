@@ -32,7 +32,7 @@ class ALBertForSeq(AlbertPreTrainedModel):
         super(ALBertForSeq, self).__init__(config)
 
         self.config = AlbertConfig(config)
-        self.num_labels = 40
+        self.num_labels = 2
         self.albert = AlbertModel(config)
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
@@ -83,8 +83,9 @@ def model_init(choice='RoBERTa'):
         model = model.cuda()
         return model, tokenizer
     else:
-        model = ALBertForSeq.from_pretrained('albert-base')
-        tokenizer = AlbertTokenizer.from_pretrained('albert-base')
+        model = ALBertForSeq.from_pretrained('albert-base-v1')
+        tokenizer = AlbertTokenizer.from_pretrained('albert-base-v1')
+        model = model.cuda()
         return model, tokenizer
 
 
@@ -236,7 +237,7 @@ def train(model, epochs, optimizer, training_loader, info_name, choice):
             output_name = f"{info_name}-model.bin"
             output_model_file = os.path.join(output_dir, output_name)
             torch.save(model.state_dict(), output_model_file)
-            print(f"Model Save!, Loss: {loss.item()}")
+            print(f"Model Save!, Loss: {avg_val_loss}")
 
     cache_info(final_file, f"Total train time: {format_time(time.time() - start_time)}")
 
@@ -283,7 +284,7 @@ def evaluate(model, val_iter, choice):
             if torch.cuda.is_available():
                 sent = sent.cuda()
                 label = label.cuda()
-            output = model.forward(sent)[0]
+            output = model(sent)[0]
             _, predicted = torch.max(output.data, 1)
             loss = loss_function(output, label)
             avg_val_loss += loss.item()
@@ -349,12 +350,13 @@ if __name__ == "__main__":
     loss_function = nn.CrossEntropyLoss()
     optimizer = optim.Adam(params=model.parameters(), lr=params["LR"]) if params["choice"] == 'RoBERTa' else AdamW(model.parameters(), lr=params['LR'])
 
-    total_steps = len(training_loader) * params["epochs"]
+    if params["choice"] == "ALBERT":
+        total_steps = len(training_loader) * params["epochs"]
 
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer,
-        num_warmup_steps=0.05 * total_steps,
-        num_training_steps=total_steps)
+        scheduler = get_linear_schedule_with_warmup(
+            optimizer,
+            num_warmup_steps=0.05 * total_steps,
+            num_training_steps=total_steps)
 
     save_config(params, info_name)
     train(model, params["epochs"], optimizer, training_loader, info_name, choice=params["choice"])
