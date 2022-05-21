@@ -288,11 +288,11 @@ def evaluate(model, val_iter, choice):
 if __name__ == "__main__":
     # init params section
     params = {
-        "batch_size": 32,
+        "batch_size": 1,
         "LR": 1e-05,
         "train_path": '../data/train_idx.csv',
         "valid_path": '../data/valid_idx.csv',
-        "epochs": 3,
+        "epochs": 10,
         "choice": 'ALBERT'
     }
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
