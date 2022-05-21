@@ -112,6 +112,22 @@ class TestInput:
         }
 
 
+def label_to_idx(file_path):
+
+    df = pd.read_csv(file_path)
+    text, label = df["text"], df["label"]
+
+    label_to_inx = {'unsustainable': 0, 'sustainable': 1}
+
+    out = []
+    for l, t in zip(label, text):
+        out.append([t, label_to_inx[l]])
+
+    df2 = pd.DataFrame(out, columns=["text", "label"])
+    df2.to_csv("../data/valid_idx.csv", index=False)
+
+
 if __name__ == '__main__':
     # remove_stopWord("../data/train.csv")
-    remove_punc("../data/train2.csv")
+    # remove_punc("../data/train2.csv")
+    label_to_idx("../data/valid.csv")

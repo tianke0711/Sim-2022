@@ -1,9 +1,7 @@
+# Python basic
 import json
 import pandas as pd
 import numpy as np
-from tqdm import tqdm_notebook
-from uuid import uuid4
-import tqdm
 import time
 import os
 
@@ -23,7 +21,9 @@ from transformers.utils.notebook import format_time
 from transformers.modeling_outputs import SequenceClassifierOutput
 from transformers import AlbertTokenizer, AlbertModel, AlbertPreTrainedModel, AlbertConfig, AlbertForPreTraining
 
+# my file
 from process_file import InputDataSet, TestInput
+from prediction import my_prediction
 
 
 class ALBertForSeq(AlbertPreTrainedModel):
@@ -83,8 +83,8 @@ def model_init(choice='RoBERTa'):
         model = model.cuda()
         return model, tokenizer
     else:
-        model = ALBertForSeq.from_pretrained('albert-base-v1')
-        tokenizer = AlbertTokenizer.from_pretrained('albert-base-v1')
+        model = ALBertForSeq.from_pretrained('albert-base-v2')
+        tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
         model = model.cuda()
         return model, tokenizer
 
@@ -160,17 +160,6 @@ class Intents(Dataset):
         return self.len
 
 
-def get_result(pred, lst_true):
-    """Get final result"""
-    from sklearn.metrics import accuracy_score, f1_score
-
-    acc = accuracy_score(lst_true, pred)
-    f1_micro = f1_score(lst_true, pred, average='micro')
-    f1_macro = f1_score(lst_true, pred, average='macro')
-
-    return acc, f1_micro, f1_macro
-
-
 def cache_info(out_file, text):
     """Input logging"""
     print(text)
@@ -243,37 +232,37 @@ def train(model, epochs, optimizer, training_loader, info_name, choice):
 
 
 def evaluate(model, val_iter, choice):
-    """计算验证集的误差和准确率"""
+    """computer loss and acc for valid set"""
     if choice == "ALBERT":
         total_val_loss = 0
         corrects = []
         for batch in val_iter:
-            # 从迭代器中取出每个批次
+            # take each batch from the iterator
             input_ids = batch["input_ids"].cuda()
             attention_mask = batch["attention_mask"].cuda()
             token_type_ids = batch["token_type_ids"].cuda()
             labels = batch["labels"].cuda()
 
-            # 验证集的outputs不参与训练集后续的梯度计算
+            # the outputs of the validation set are not involved in the subsequent gradient calculation of the training set
             with torch.no_grad():
                 outputs = model(input_ids, attention_mask, token_type_ids, labels)
 
-            # 获取该批次中所有样本的所有分类中的最大值，将最大值变为1，其余变为0
+            # get the maximum value in all categories for all samples in the batch, change the maximum value to 1 and the rest to 0
             logits = torch.argmax(outputs.logits, dim=1)
             # 将预测值不参与后续训练集的梯度计算
             preds = logits.detach().cpu().numpy()
             labels_ids = labels.to("cpu").numpy()
-            # 求出该批次的准确率
+            # get acc for now batch
             corrects.append((preds == labels_ids).mean())
 
             loss = outputs.loss
-            # 累加损失
+            # stack loss
             # total_val_loss += loss.mean().item()
             total_val_loss += loss.item()
 
-        # 求出平均损失
+        # get avg loss
         avg_val_loss = total_val_loss / len(val_iter)
-        # 求出平均准确率
+        # get avg acc
         avg_val_acc = np.mean(corrects)
     else:
         correct = 0
@@ -296,60 +285,30 @@ def evaluate(model, val_iter, choice):
     return avg_val_loss, avg_val_acc
 
 
-def prediction(model, testing_loader, info_name):
-    """Prediction function"""
-
-    final_file = os.path.join("../document/preds", info_name + "-preds.txt")
-    outputs = []
-    lst_prediction = []
-    lst_true = []
-    lst_class = ['unsustainable', 'sustainable']
-    model.eval()
-    for sent, label in testing_loader:
-        sent = sent.squeeze(1)
-        lst_true.append(label)
-        if torch.cuda.is_available():
-            sent = sent.cuda()
-
-        with torch.no_grad():
-            output = model(sent)[0]
-            outputs.append(output)
-            _, pred_label = torch.max(output.data, 1)
-            # prediction = list(label_to_inx.keys())[pred_label]
-            # predicted = [lst_class[int(pred)] for pred in pred_label]
-            lst_prediction.append(pred_label)
-    outputs = [o.to('cpu').detach().numpy().copy() for o in outputs]
-
-    # predictions2 = []
-    # [predictions2.append([x[1] for x in [sorted(zip(example[0], lst_class), reverse=True)][0]]) for example in outputs]
-
-    # predictions3 = [a[0] for a in predictions2]
-    # lst_true = list(df_valid['label'])
-    lst_true = [int(i) for l in lst_true for i in l]
-    lst_prediction = [int(i) for l in lst_prediction for i in l]
-
-    acc, f1_micro, f1_macro = get_result(lst_prediction, lst_true)
-    cache_info(final_file, f"acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
-
-
 if __name__ == "__main__":
+    # init params section
     params = {
         "batch_size": 32,
         "LR": 1e-05,
-        "train_path": '../data/train.csv',
-        "valid_path": '../data/valid.csv',
-        "epochs": 32,
+        "train_path": '../data/train_idx.csv',
+        "valid_path": '../data/valid_idx.csv',
+        "epochs": 3,
         "choice": 'ALBERT'
     }
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
     label_to_inx = {'unsustainable': 0, 'sustainable': 1}
 
+    # load model and tokenizer
     model, tokenizer = model_init(choice=params["choice"])
+    # load data set
     training_loader, testing_loader = data_init(params["train_path"], params["valid_path"], params["batch_size"], choice=params["choice"])
 
+    # loss function
     loss_function = nn.CrossEntropyLoss()
+    # different model use different loss func
     optimizer = optim.Adam(params=model.parameters(), lr=params["LR"]) if params["choice"] == 'RoBERTa' else AdamW(model.parameters(), lr=params['LR'])
 
+    # albert need preheating model
     if params["choice"] == "ALBERT":
         total_steps = len(training_loader) * params["epochs"]
 
@@ -358,6 +317,9 @@ if __name__ == "__main__":
             num_warmup_steps=0.05 * total_steps,
             num_training_steps=total_steps)
 
+    # save config
     save_config(params, info_name)
+
+    # train and prediction
     train(model, params["epochs"], optimizer, training_loader, info_name, choice=params["choice"])
-    prediction(model, testing_loader, info_name)
+    my_prediction(model, testing_loader, info_name, choice=params["choice"])
