@@ -113,7 +113,6 @@ class TestInput:
 
 
 def label_to_idx(file_path):
-
     df = pd.read_csv(file_path)
     text, label = df["text"], df["label"]
 
@@ -127,7 +126,25 @@ def label_to_idx(file_path):
     df2.to_csv("../data/valid_idx.csv", index=False)
 
 
+def split_train_val(file_path, rate):
+    df = pd.read_csv(file_path)
+    labels, texts = df["label"], df["text"]
+
+    train_data, val_data, train_label, val_label = train_test_split(texts, labels, shuffle=True, test_size=rate,
+                                                                    random_state=6)
+
+    train = zip(train_data, train_label)
+    val = zip(val_data, val_label)
+
+    train_df = pd.DataFrame(train, columns=["text", "label"])
+    val_df = pd.DataFrame(val, columns=["text", "label"])
+
+    train_df.to_csv("../data/train_idx2.csv")
+    val_df.to_csv("../data/val_idx2.csv")
+
+
 if __name__ == '__main__':
     # remove_stopWord("../data/train.csv")
     # remove_punc("../data/train2.csv")
-    label_to_idx("../data/valid.csv")
+    # label_to_idx("../data/valid.csv")
+    split_train_val("../data/train_idx.csv", 0.2)

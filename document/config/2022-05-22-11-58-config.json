@@ -1,0 +1,9 @@
+{
+  "batch_size": 32,
+  "LR": 1e-05,
+  "train_path": "../data/train_idx2.csv",
+  "valid_path": "../data/val_idx2.csv",
+  "test_path": "../data/valid_idx.csv",
+  "epochs": 3,
+  "choice": "ALBERT"
+}

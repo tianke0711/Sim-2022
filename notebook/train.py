@@ -92,7 +92,7 @@ def model_init(choice='RoBERTa'):
         return model, tokenizer
 
 
-def data_init(train_path, valid_path, batch_size, choice='RoBERTa'):
+def data_init(train_path, valid_path, test_path, batch_size, choice='RoBERTa'):
     if choice == 'RoBERTa':
         df_train = pd.read_csv(train_path)
         df_valid = pd.read_csv(valid_path)
@@ -109,12 +109,15 @@ def data_init(train_path, valid_path, batch_size, choice='RoBERTa'):
     else:
         train = pd.read_csv(train_path)
         val = pd.read_csv(valid_path)
+        test = pd.read_csv(test_path)
         train_data = InputDataSet(train, tokenizer, 128)
         val_data = InputDataSet(val, tokenizer, 128)
+        test_data = InputDataSet(test, tokenizer, 128)
 
         train_iter = DataLoader(train_data, batch_size=batch_size, num_workers=0)
         val_iter = DataLoader(val_data, batch_size=batch_size, num_workers=0)
-        return train_iter, val_iter
+        test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
+        return train_iter, val_iter, test_iter
 
 
 def prepare_features(seq_1, max_seq_length=128, zero_pad=True, include_CLS_token=True, include_SEP_token=True):
@@ -220,7 +223,7 @@ def train(model, epochs, optimizer, training_loader, info_name, choice):
                 scheduler.step()
 
         model.eval()
-        avg_val_loss, avg_val_acc = evaluate(model, testing_loader, choice)
+        avg_val_loss, avg_val_acc = evaluate(model, valing_loader, choice)
         cache_info(final_file, f"Loss: {avg_val_loss}, Acc: {avg_val_acc}")
 
         if min_loss > avg_val_loss:
@@ -293,9 +296,10 @@ if __name__ == "__main__":
     params = {
         "batch_size": 32,
         "LR": 1e-05,
-        "train_path": '../data/train_idx.csv',
-        "valid_path": '../data/valid_idx.csv',
-        "epochs": 3,
+        "train_path": '../data/train_idx2.csv',
+        "valid_path": '../data/val_idx2.csv',
+        "test_path": '../data/valid_idx.csv',
+        "epochs": 6,
         "choice": 'ALBERT'
     }
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
@@ -304,7 +308,7 @@ if __name__ == "__main__":
     # load model and tokenizer
     model, tokenizer = model_init(choice=params["choice"])
     # load data set
-    training_loader, testing_loader = data_init(params["train_path"], params["valid_path"], params["batch_size"], choice=params["choice"])
+    training_loader, valing_loader, testing_loader = data_init(params["train_path"], params["valid_path"], params["test_path"], params["batch_size"], choice=params["choice"])
 
     # loss function
     loss_function = nn.CrossEntropyLoss()
