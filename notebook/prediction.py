@@ -72,3 +72,4 @@ def my_prediction(model, testing_loader, info_name, choice):
 
     acc, f1_micro, f1_macro = get_result(lst_prediction, lst_true)
     cache_info(final_file, f"acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
+    return acc, f1_micro, f1_macro

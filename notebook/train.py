@@ -211,16 +211,22 @@ def save_config(config, info_name):
     print("Config saved!")
 
 
-def train(model, epochs, optimizer, info_name, choice):
+def train(epochs, info_name, choice):
     """Train dataSet"""
 
     final_file = os.path.join("../document/log", info_name + ".txt")
 
     start_time = time.time()
 
-    min_loss = 9999.9
     k_result = []
     for k, (train_iter, valid_iter) in enumerate(zip(train_iter_list, valid_iter_list)):
+        model, tokenizer = model_init(choice=params["choice"])
+        # loss function
+        loss_function = nn.CrossEntropyLoss()
+        # different model use different loss func
+        optimizer = optim.Adam(params=model.parameters(), lr=params["LR"]) if params["choice"] == 'RoBERTa' else AdamW(
+            model.parameters(), lr=params['LR'])
+
         # albert need preheating model
         total_steps = len(train_iter) * epochs
         scheduler = get_linear_schedule_with_warmup(
@@ -228,7 +234,8 @@ def train(model, epochs, optimizer, info_name, choice):
             num_warmup_steps=0.05 * total_steps,
             num_training_steps=total_steps)
 
-        batch_acc = 0
+        min_loss = 9999.9
+        max_acc = 0
         for epoch in range(epochs):
             model.train()
 
@@ -265,17 +272,25 @@ def train(model, epochs, optimizer, info_name, choice):
             model.eval()
             avg_val_loss, avg_val_acc = evaluate(model, valid_iter, choice)
             cache_info(final_file, f"K: {k}, Loss: {avg_val_loss}, Acc: {avg_val_acc}")
-            batch_acc = max(batch_acc, avg_val_acc)
 
-            if min_loss > avg_val_loss:
+            if min_loss > avg_val_loss or max_acc < avg_val_acc:
                 min_loss = avg_val_loss
+                max_acc = avg_val_acc
                 output_dir = "../document/model"
-                output_name = f"{info_name}-model.bin"
+                output_name = f"{info_name}-{k}-model.bin"
                 output_model_file = os.path.join(output_dir, output_name)
                 torch.save(model.state_dict(), output_model_file)
                 print(f"Model Save!, Loss: {avg_val_loss}")
 
-        k_result.append(batch_acc)
+        acc, f1_micro, f1_macro = my_prediction(model, test_iter, info_name, choice=params["choice"])
+        k_result.append([acc, f1_micro, f1_macro])
+
+    avg_acc, avg_f1_mi, avg_f1_ma = 0, 0, 0
+    for temp in k_result:
+        avg_acc += temp[0]
+        avg_f1_mi += temp[1]
+        avg_f1_ma += temp[2]
+    print(f"\navg_acc: {avg_acc / len(k_result)}, avg_f1_micro: {avg_f1_mi / len(k_result)}, avg_f1_macro: {avg_f1_ma / len(k_result)}")
 
     cache_info(final_file, f"Total train time: {format_time(time.time() - start_time)}")
 
@@ -342,7 +357,7 @@ if __name__ == "__main__":
         "train_path": '../data/train_idx.csv',
         "valid_path": '../data/val_idx2.csv',
         "test_path": '../data/valid_idx.csv',
-        "epochs": 3,
+        "epochs": 6,
         "choice": 'ALBERT',
         "n_splits": 5
     }
@@ -350,19 +365,13 @@ if __name__ == "__main__":
     label_to_inx = {'unsustainable': 0, 'sustainable': 1}
 
     # load model and tokenizer
-    model, tokenizer = model_init(choice=params["choice"])
+    _, tokenizer = model_init(choice=params["choice"])
     # load data set
     # train_iter, valid_iter, test_iter = data_init(params["train_path"], params["valid_path"], params["test_path"], params["batch_size"], choice=params["choice"])
     train_iter_list, valid_iter_list, test_iter = cross_valid(params["train_path"], params["test_path"], params["batch_size"], params["n_splits"])
-
-    # loss function
-    loss_function = nn.CrossEntropyLoss()
-    # different model use different loss func
-    optimizer = optim.Adam(params=model.parameters(), lr=params["LR"]) if params["choice"] == 'RoBERTa' else AdamW(model.parameters(), lr=params['LR'])
 
     # save config
     save_config(params, info_name)
 
     # train and prediction
-    train(model, params["epochs"], optimizer, info_name, choice=params["choice"])
-    my_prediction(model, test_iter, info_name, choice=params["choice"])
+    train(params["epochs"], info_name, choice=params["choice"])
