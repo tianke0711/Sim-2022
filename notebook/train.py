@@ -22,6 +22,9 @@ from transformers.modeling_outputs import SequenceClassifierOutput
 from transformers import AlbertTokenizer, AlbertModel, AlbertPreTrainedModel, AlbertConfig, AlbertForPreTraining
 from transformers import logging
 
+# sklearn Modules
+from sklearn.model_selection import KFold
+
 # my file
 from process_file import InputDataSet, TestInput
 from prediction import my_prediction
@@ -120,6 +123,33 @@ def data_init(train_path, valid_path, test_path, batch_size, choice='RoBERTa'):
         return train_iter, val_iter, test_iter
 
 
+def cross_valid(train_path, test_path, batch_size, n_splits):
+    train = pd.read_csv(train_path)
+    test = pd.read_csv(test_path)
+    kf = KFold(n_splits=n_splits, shuffle=True, random_state=6)
+    train_data, valid_data = [], []
+    for train_idx, valid_idx in kf.split(train):
+        train_temp = train.iloc[train_idx]
+        valid_temp = train.iloc[valid_idx]
+        train_temp.index = [x for x in range(len(train_temp))]
+        valid_temp.index = [x for x in range(len(valid_temp))]
+        train_data.append(train_temp)
+        valid_data.append(valid_temp)
+    train_iter_list = []
+    for data in train_data:
+        train_temp = InputDataSet(data, tokenizer, 128)
+        train_iter = DataLoader(train_temp, batch_size=batch_size, num_workers=0)
+        train_iter_list.append(train_iter)
+    valid_iter_list = []
+    for data in valid_data:
+        valid_temp = InputDataSet(data, tokenizer, 128)
+        valid_iter = DataLoader(valid_temp, batch_size=batch_size, num_workers=0)
+        valid_iter_list.append(valid_iter)
+    test_data = InputDataSet(test, tokenizer, 128)
+    test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
+    return train_iter_list, valid_iter_list, test_iter
+
+
 def prepare_features(seq_1, max_seq_length=128, zero_pad=True, include_CLS_token=True, include_SEP_token=True):
     # Tokenzine Input
     tokens_a = tokenizer.tokenize(seq_1)
@@ -181,7 +211,7 @@ def save_config(config, info_name):
     print("Config saved!")
 
 
-def train(model, epochs, optimizer, training_loader, info_name, choice):
+def train(model, epochs, optimizer, info_name, choice):
     """Train dataSet"""
 
     final_file = os.path.join("../document/log", info_name + ".txt")
@@ -189,50 +219,63 @@ def train(model, epochs, optimizer, training_loader, info_name, choice):
     start_time = time.time()
 
     min_loss = 9999.9
-    for epoch in range(epochs):
-        model.train()
+    k_result = []
+    for k, (train_iter, valid_iter) in enumerate(zip(train_iter_list, valid_iter_list)):
+        # albert need preheating model
+        total_steps = len(train_iter) * epochs
+        scheduler = get_linear_schedule_with_warmup(
+            optimizer,
+            num_warmup_steps=0.05 * total_steps,
+            num_training_steps=total_steps)
 
-        cache_info(final_file, "")
-        cache_info(final_file, f"EPOCH -- {epoch}")
-        for i, batch in enumerate(training_loader):
-            if choice == "RoBERTa":
-                sent, label = batch[0], batch[1]
-                optimizer.zero_grad()
-                sent = sent.squeeze(1)
-                if torch.cuda.is_available():
-                    sent = sent.cuda()
-                    label = label.cuda()
-                output = model.forward(sent)[0]
-                _, predicted = torch.max(output, 1)
+        batch_acc = 0
+        for epoch in range(epochs):
+            model.train()
 
-                loss = loss_function(output, label)
-                loss.backward()
-                optimizer.step()
-            else:
-                input_ids = batch["input_ids"].cuda()
-                attention_mask = batch["attention_mask"].cuda()
-                token_type_ids = batch["token_type_ids"].cuda()
-                labels = batch["labels"].cuda()
+            cache_info(final_file, "")
+            cache_info(final_file, f"K: {k}, EPOCH -- {epoch}")
+            for i, batch in enumerate(train_iter):
+                if choice == "RoBERTa":
+                    sent, label = batch[0], batch[1]
+                    optimizer.zero_grad()
+                    sent = sent.squeeze(1)
+                    if torch.cuda.is_available():
+                        sent = sent.cuda()
+                        label = label.cuda()
+                    output = model.forward(sent)[0]
+                    _, predicted = torch.max(output, 1)
 
-                model.zero_grad()
-                outputs = model(input_ids, attention_mask, token_type_ids, labels)
-                loss = outputs.loss
-                loss.backward()
-                nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-                optimizer.step()
-                scheduler.step()
+                    loss = loss_function(output, label)
+                    loss.backward()
+                    optimizer.step()
+                else:
+                    input_ids = batch["input_ids"].cuda()
+                    attention_mask = batch["attention_mask"].cuda()
+                    token_type_ids = batch["token_type_ids"].cuda()
+                    labels = batch["labels"].cuda()
 
-        model.eval()
-        avg_val_loss, avg_val_acc = evaluate(model, valing_loader, choice)
-        cache_info(final_file, f"Loss: {avg_val_loss}, Acc: {avg_val_acc}")
+                    model.zero_grad()
+                    outputs = model(input_ids, attention_mask, token_type_ids, labels)
+                    loss = outputs.loss
+                    loss.backward()
+                    nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                    optimizer.step()
+                    scheduler.step()
 
-        if min_loss > avg_val_loss:
-            min_loss = avg_val_loss
-            output_dir = "../document/model"
-            output_name = f"{info_name}-model.bin"
-            output_model_file = os.path.join(output_dir, output_name)
-            torch.save(model.state_dict(), output_model_file)
-            print(f"Model Save!, Loss: {avg_val_loss}")
+            model.eval()
+            avg_val_loss, avg_val_acc = evaluate(model, valid_iter, choice)
+            cache_info(final_file, f"K: {k}, Loss: {avg_val_loss}, Acc: {avg_val_acc}")
+            batch_acc = max(batch_acc, avg_val_acc)
+
+            if min_loss > avg_val_loss:
+                min_loss = avg_val_loss
+                output_dir = "../document/model"
+                output_name = f"{info_name}-model.bin"
+                output_model_file = os.path.join(output_dir, output_name)
+                torch.save(model.state_dict(), output_model_file)
+                print(f"Model Save!, Loss: {avg_val_loss}")
+
+        k_result.append(batch_acc)
 
     cache_info(final_file, f"Total train time: {format_time(time.time() - start_time)}")
 
@@ -296,11 +339,12 @@ if __name__ == "__main__":
     params = {
         "batch_size": 32,
         "LR": 1e-05,
-        "train_path": '../data/train_idx2.csv',
+        "train_path": '../data/train_idx.csv',
         "valid_path": '../data/val_idx2.csv',
         "test_path": '../data/valid_idx.csv',
-        "epochs": 6,
-        "choice": 'ALBERT'
+        "epochs": 3,
+        "choice": 'ALBERT',
+        "n_splits": 5
     }
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
     label_to_inx = {'unsustainable': 0, 'sustainable': 1}
@@ -308,25 +352,17 @@ if __name__ == "__main__":
     # load model and tokenizer
     model, tokenizer = model_init(choice=params["choice"])
     # load data set
-    training_loader, valing_loader, testing_loader = data_init(params["train_path"], params["valid_path"], params["test_path"], params["batch_size"], choice=params["choice"])
+    # train_iter, valid_iter, test_iter = data_init(params["train_path"], params["valid_path"], params["test_path"], params["batch_size"], choice=params["choice"])
+    train_iter_list, valid_iter_list, test_iter = cross_valid(params["train_path"], params["test_path"], params["batch_size"], params["n_splits"])
 
     # loss function
     loss_function = nn.CrossEntropyLoss()
     # different model use different loss func
     optimizer = optim.Adam(params=model.parameters(), lr=params["LR"]) if params["choice"] == 'RoBERTa' else AdamW(model.parameters(), lr=params['LR'])
 
-    # albert need preheating model
-    if params["choice"] == "ALBERT":
-        total_steps = len(training_loader) * params["epochs"]
-
-        scheduler = get_linear_schedule_with_warmup(
-            optimizer,
-            num_warmup_steps=0.05 * total_steps,
-            num_training_steps=total_steps)
-
     # save config
     save_config(params, info_name)
 
     # train and prediction
-    train(model, params["epochs"], optimizer, training_loader, info_name, choice=params["choice"])
-    my_prediction(model, testing_loader, info_name, choice=params["choice"])
+    train(model, params["epochs"], optimizer, info_name, choice=params["choice"])
+    my_prediction(model, test_iter, info_name, choice=params["choice"])
