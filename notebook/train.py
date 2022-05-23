@@ -26,7 +26,7 @@ from transformers import logging
 from sklearn.model_selection import KFold
 
 # my file
-from process_file import ALBERTInputDataSet, TestInput, RoBERTaInputDataSet
+from process_file import InputDataSet, TestInput
 from prediction import my_prediction, avg_prediction
 from model import ALBertForSeq, RoBERTaForSeq
 
@@ -95,18 +95,15 @@ def cross_valid(train_path, test_path, batch_size, n_splits):
         valid_data.append(valid_temp)
     train_iter_list = []
     for data in train_data:
-        # train_temp = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
-        train_temp = ALBERTInputDataSet(data, tokenizer, 128)
+        train_temp = InputDataSet(data, tokenizer, 128)
         train_iter = DataLoader(train_temp, batch_size=batch_size, num_workers=0)
         train_iter_list.append(train_iter)
     valid_iter_list = []
     for data in valid_data:
-        # valid_temp = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
-        valid_temp = ALBERTInputDataSet(data, tokenizer, 128)
+        valid_temp = InputDataSet(data, tokenizer, 128)
         valid_iter = DataLoader(valid_temp, batch_size=batch_size, num_workers=0)
         valid_iter_list.append(valid_iter)
-    # test_data = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
-    test_data = ALBERTInputDataSet(data, tokenizer, 128)
+    test_data = InputDataSet(data, tokenizer, 128)
     test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
     return train_iter_list, valid_iter_list, test_iter
 
@@ -203,8 +200,6 @@ def train(epochs, info_name, choice):
             for i, batch in enumerate(train_iter):
                 input_ids = batch["input_ids"].cuda()
                 attention_mask = batch["attention_mask"].cuda()
-                token_type_ids = None
-                # if choice == "ALBERT":
                 token_type_ids = batch["token_type_ids"].cuda()
                 labels = batch["labels"].cuda()
 
@@ -266,10 +261,10 @@ def evaluate(model, val_iter, choice):
         # total_val_loss += loss.mean().item()
         total_val_loss += loss.item()
 
-        # get avg loss
-        avg_val_loss = total_val_loss / len(val_iter)
-        # get avg acc
-        avg_val_acc = np.mean(corrects)
+    # get avg loss
+    avg_val_loss = total_val_loss / len(val_iter)
+    # get avg acc
+    avg_val_acc = np.mean(corrects)
 
     return avg_val_loss, avg_val_acc
 
@@ -279,9 +274,9 @@ if __name__ == "__main__":
     params = {
         "batch_size": 32,
         "LR": 2e-05,
-        "train_path": '../data/train_idx.csv',
+        "train_path": '../data/train_idx2.csv',
         "valid_path": '../data/val_idx2.csv',
-        "test_path": '../data/valid_idx.csv',
+        "test_path": '../data/test_idx2.csv',
         "epochs": 10,
         "choice": 'RoBERTa',
         "n_splits": 5
