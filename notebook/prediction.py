@@ -33,42 +33,42 @@ def my_prediction(model, testing_loader, info_name, choice):
     lst_prediction = []
     lst_true = []
     lst_prob = []
-    if choice == "RoBERTa":
-        model.eval()
-        for sent, label in testing_loader:
-            sent = sent.squeeze(1)
-            lst_true.append(label)
-            if torch.cuda.is_available():
-                sent = sent.cuda()
+    # if choice == "RoBERTa":
+    #     model.eval()
+    #     for sent, label in testing_loader:
+    #         sent = sent.squeeze(1)
+    #         lst_true.append(label)
+    #         if torch.cuda.is_available():
+    #             sent = sent.cuda()
 
-            with torch.no_grad():
-                output = model(sent)[0]
-                _, pred_label = torch.max(output.data, 1)
+    #         with torch.no_grad():
+    #             output = model(sent)[0]
+    #             _, pred_label = torch.max(output.data, 1)
 
-                lst_prediction.append(pred_label)
+    #             lst_prediction.append(pred_label)
 
-    else:
-        model = model.cuda()
-        model.eval()
-        print("Evaluate Start!")
-        for step, batch in enumerate(testing_loader):
-            print(f"The [{step + 1}]/[{len(testing_loader)}]")
-            with torch.no_grad():
-                input_ids = batch["input_ids"].cuda()
-                attention_mask = batch["attention_mask"].cuda()
-                token_type_ids = batch["token_type_ids"].cuda()
-                labels = batch["labels"].cuda()
+    # else:
+    model = model.cuda()
+    model.eval()
+    print("Evaluate Start!")
+    for step, batch in enumerate(testing_loader):
+        print(f"The [{step + 1}]/[{len(testing_loader)}]")
+        with torch.no_grad():
+            input_ids = batch["input_ids"].cuda()
+            attention_mask = batch["attention_mask"].cuda()
+            token_type_ids = batch["token_type_ids"].cuda()
+            labels = batch["labels"].cuda()
 
-                outputs = model(input_ids, attention_mask, token_type_ids)
-                probs = softmax(outputs.logits, dim=1)
-                logits = torch.argmax(probs, dim=1)
-                preds = logits.detach().cpu().numpy()
-                labels_ids = labels.to("cpu").numpy()
+            outputs = model(input_ids, attention_mask, token_type_ids)
+            probs = softmax(outputs.logits, dim=1)
+            logits = torch.argmax(probs, dim=1)
+            preds = logits.detach().cpu().numpy()
+            labels_ids = labels.to("cpu").numpy()
 
-                lst_prediction.append(preds)
-                lst_true.append(labels_ids)
-                lst_prob.append(probs)
-        print("Evaluate End!")
+            lst_prediction.append(preds)
+            lst_true.append(labels_ids)
+            lst_prob.append(probs)
+    print("Evaluate End!")
 
     lst_true = [int(i) for l in lst_true for i in l]
     lst_prediction = [int(i) for l in lst_prediction for i in l]
