@@ -27,7 +27,7 @@ from sklearn.model_selection import KFold
 
 # my file
 from process_file import InputDataSet, TestInput
-from prediction import my_prediction
+from prediction import my_prediction, avg_prediction
 
 logging.set_verbosity_error()
 
@@ -219,6 +219,7 @@ def train(epochs, info_name, choice):
     start_time = time.time()
 
     k_result = []
+    true_label = []
     for k, (train_iter, valid_iter) in enumerate(zip(train_iter_list, valid_iter_list)):
         model, tokenizer = model_init(choice=params["choice"])
         # loss function
@@ -282,15 +283,11 @@ def train(epochs, info_name, choice):
                 torch.save(model.state_dict(), output_model_file)
                 print(f"Model Save!, Loss: {avg_val_loss}")
 
-        acc, f1_micro, f1_macro = my_prediction(model, test_iter, info_name, choice=params["choice"])
-        k_result.append([acc, f1_micro, f1_macro])
+        acc, f1_micro, f1_macro, lst_prob, lst_true = my_prediction(model, test_iter, info_name, choice=params["choice"])
+        k_result.append(lst_prob)
+        true_label = lst_true
 
-    avg_acc, avg_f1_mi, avg_f1_ma = 0, 0, 0
-    for temp in k_result:
-        avg_acc += temp[0]
-        avg_f1_mi += temp[1]
-        avg_f1_ma += temp[2]
-    print(f"\navg_acc: {avg_acc / len(k_result)}, avg_f1_micro: {avg_f1_mi / len(k_result)}, avg_f1_macro: {avg_f1_ma / len(k_result)}")
+    avg_prediction(k_result, true_label)
 
     cache_info(final_file, f"Total train time: {format_time(time.time() - start_time)}")
 
@@ -353,11 +350,11 @@ if __name__ == "__main__":
     # init params section
     params = {
         "batch_size": 32,
-        "LR": 1e-05,
+        "LR": 2e-05,
         "train_path": '../data/train_idx.csv',
         "valid_path": '../data/val_idx2.csv',
         "test_path": '../data/valid_idx.csv',
-        "epochs": 6,
+        "epochs": 3,
         "choice": 'ALBERT',
         "n_splits": 5
     }

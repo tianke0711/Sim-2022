@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from torch import nn
+from torch.nn.functional import softmax
 import time
 import os
 import torch
@@ -31,6 +32,7 @@ def my_prediction(model, testing_loader, info_name, choice):
     final_file = os.path.join("../document/preds", info_name + "-preds.txt")
     lst_prediction = []
     lst_true = []
+    lst_prob = []
     if choice == "RoBERTa":
         model.eval()
         for sent, label in testing_loader:
@@ -58,18 +60,29 @@ def my_prediction(model, testing_loader, info_name, choice):
                 labels = batch["labels"].cuda()
 
                 outputs = model(input_ids, attention_mask, token_type_ids)
-
-                logits = torch.argmax(outputs.logits, dim=1)
+                probs = softmax(outputs.logits, dim=1)
+                logits = torch.argmax(probs, dim=1)
                 preds = logits.detach().cpu().numpy()
                 labels_ids = labels.to("cpu").numpy()
 
                 lst_prediction.append(preds)
                 lst_true.append(labels_ids)
+                lst_prob.append(probs)
         print("Evaluate End!")
 
     lst_true = [int(i) for l in lst_true for i in l]
     lst_prediction = [int(i) for l in lst_prediction for i in l]
+    lst_prob = [i.to('cpu').numpy() for prob in lst_prob for i in prob]
 
     acc, f1_micro, f1_macro = get_result(lst_prediction, lst_true)
     cache_info(final_file, f"acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
-    return acc, f1_micro, f1_macro
+    return acc, f1_micro, f1_macro, lst_prob, lst_true
+
+
+def avg_prediction(k_result, lst_true):
+    k_result = np.array(k_result)
+    avg_probs = np.sum(k_result, axis=0) / 5
+    avg_probs = torch.from_numpy(avg_probs)
+    avg_preds = torch.argmax(avg_probs, dim=1)
+    acc, f1_micro, f1_macro = get_result(avg_preds, lst_true)
+    print(f"\navg: acc: {acc}, f1_micro: {f1_micro}, f1_macro: {f1_macro}")
