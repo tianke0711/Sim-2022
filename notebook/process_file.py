@@ -42,7 +42,7 @@ def remove_punc(file_path):
     out.to_csv("../data/train4.csv", index=False)
 
 
-class InputDataSet:
+class ALBERTInputDataSet:
 
     def __init__(self, data, tokenizer, max_len):
         self.data = data
@@ -109,6 +109,40 @@ class TestInput:
             'input_ids': input_ids,
             'attention_mask': attention_mask,
             'token_type_ids': token_type_ids,
+        }
+
+
+class RoBERTaInputDataSet:
+
+    def __init__(self, data, tokenizer, max_len):
+        self.data = data
+        self.tokenizer = tokenizer
+        self.max_len = max_len
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, index):
+        text = str(self.data['text'][index])
+        labels = torch.tensor(self.data['label'][index], dtype=torch.long)
+
+        output = self.tokenizer.encode_plus(
+            text=text,
+            add_special_tokens=True,
+            truncation=True,
+            padding='max_length',
+            max_length=self.max_len,
+            return_tensors='pt'
+        )
+
+        input_ids, attention_mask = output.values()
+        input_ids = input_ids.squeeze(dim=0)
+        attention_mask = attention_mask.squeeze(dim=0)
+        return {
+            'text': text,
+            'input_ids': input_ids,
+            'attention_mask': attention_mask,
+            'labels': labels
         }
 
 

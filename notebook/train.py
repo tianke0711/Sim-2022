@@ -26,7 +26,7 @@ from transformers import logging
 from sklearn.model_selection import KFold
 
 # my file
-from process_file import InputDataSet, TestInput
+from process_file import ALBERTInputDataSet, TestInput, RoBERTaInputDataSet
 from prediction import my_prediction, avg_prediction
 from model import ALBertForSeq, RoBERTaForSeq
 
@@ -95,15 +95,18 @@ def cross_valid(train_path, test_path, batch_size, n_splits):
         valid_data.append(valid_temp)
     train_iter_list = []
     for data in train_data:
-        train_temp = InputDataSet(data, tokenizer, 128)
+        # train_temp = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
+        train_temp = ALBERTInputDataSet(data, tokenizer, 128)
         train_iter = DataLoader(train_temp, batch_size=batch_size, num_workers=0)
         train_iter_list.append(train_iter)
     valid_iter_list = []
     for data in valid_data:
-        valid_temp = InputDataSet(data, tokenizer, 128)
+        # valid_temp = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
+        valid_temp = ALBERTInputDataSet(data, tokenizer, 128)
         valid_iter = DataLoader(valid_temp, batch_size=batch_size, num_workers=0)
         valid_iter_list.append(valid_iter)
-    test_data = InputDataSet(test, tokenizer, 128)
+    # test_data = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
+    test_data = ALBERTInputDataSet(data, tokenizer, 128)
     test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
     return train_iter_list, valid_iter_list, test_iter
 
@@ -200,6 +203,8 @@ def train(epochs, info_name, choice):
             for i, batch in enumerate(train_iter):
                 input_ids = batch["input_ids"].cuda()
                 attention_mask = batch["attention_mask"].cuda()
+                token_type_ids = None
+                # if choice == "ALBERT":
                 token_type_ids = batch["token_type_ids"].cuda()
                 labels = batch["labels"].cuda()
 
@@ -277,7 +282,7 @@ if __name__ == "__main__":
         "train_path": '../data/train_idx.csv',
         "valid_path": '../data/val_idx2.csv',
         "test_path": '../data/valid_idx.csv',
-        "epochs": 3,
+        "epochs": 10,
         "choice": 'RoBERTa',
         "n_splits": 5
     }
@@ -285,7 +290,7 @@ if __name__ == "__main__":
     label_to_inx = {'unsustainable': 0, 'sustainable': 1}
 
     # load model and tokenizer
-    _, tokenizer = model_init(choice=params["choice"])
+    _, tokenizer = model_init(choice="ALBERT")
     # load data set
     # train_iter, valid_iter, test_iter = data_init(params["train_path"], params["valid_path"], params["test_path"], params["batch_size"], choice=params["choice"])
     train_iter_list, valid_iter_list, test_iter = cross_valid(params["train_path"], params["test_path"], params["batch_size"], params["n_splits"])
