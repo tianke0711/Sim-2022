@@ -1,0 +1,822 @@
+[
+  {
+    "sentence": "Our dialogue has borne fruit in many ways and confirmed the company\u2019s nascent ideas on the issue.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Although Robeco engages with its providers of data center services and SAAS services, these vendors are not able to provide details of the data center carbon footprint for Robeco.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The second launch was a strategy that supports a circular economy to help further our commitment to a sustainable future.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The case was reviewed by the Global Client Risk Committee, which concluded that the company\u2019s sustainability improvements were insufficient and that the transaction would not align with the bank\u2019s commitments to energy transition.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "However, the reliance on small-scale farming in developing countries presents a clear risk to those economies if food consumption patterns change, given that small-scale farmers and especially those located in developing countries tend to operate under financially very challenging conditions.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "JPMorgan Chase leverages its core expertise in the financial markets to promote sustainable business practices and help clients capitalize on opportunities that achieve positive environmental and social outcomes, including the transition to a lower-carbon economy.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "To account for this limitation, carbon footprint, which refers to absolute emissions divided by AUM (rounded to the millions), was also estimated.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "This is a technologically optimistic view of the world, with many green and low-carbon technologies becoming cheaper than legacy choices over time but there is no aggressive coordinated international response.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Food is one of the world\u2019s most critical resources but as the weather gets more unpredictable and the global population continues to grow, food production and food security have never been more important.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "With 1,226,000 vehicles produced in France in 2019, Groupe PSA produces more vehicles in France than in any other country.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Every year, we conduct Group-wide confidential and voluntary employee surveys.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We are continually reimagining technology to meet society\u2019s many challenges and opportunities, making communities smarter and more sustainable, transportation safer, and enterprises more agile and efficient.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The following restrictions are in place to reduce our climate risk exposure and focus the provision of financial services to companies in transition.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The relative shares of each industry have fallen compared to year-end 2016 as the bank reduced its risk appetite thresholds.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "To accomplish this, we have partnered with ClimateCare, experts in providing verified carbon offset services, who finance international projects to offset our residual greenhouse gas emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "During 2020 LGIM Real Assets established science based targets which equate to a 60% carbon and energy intensity reduction in the Scope 1 and 2 emissions associated with our properties and will drive carbon reductions over the next 10 years.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "These ranged from how the pandemic was actually accelerating certain consumer trends such as streaming and food delivery.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We enhanced our energy transition pathway modelling through an additional \u2018Disorderly\u2019 scenario, which assumes action to achieve the outcomes from \u2018Paris\u2019 is delayed to 2030.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In 2015, we also adopted the Soft Commodities Compact, which aims to establish responsible practices in soft commodity supply chains, including palm oil.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Data coverage represents approximately 61% of BlackRock\u2019s seed and co-investment portfolios.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "One of those limitations is the sensitivity of absolute emissions and carbon footprint to fluctuations in asset values \u2013 particularly, though not exclusively, due to changes in EVIC from one period to the next.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "A Climate Transition Benchmark is a benchmark where the underlying assets in the benchmark are selected, weighted, or excluded in such a manner that the resulting benchmark portfolio is on a decarbonization trajectory.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Next, unusable or non-recyclable hazardous waste is treated before disposal to eliminate or reduce the hazardous nature and volume of the waste.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Executive directors of some European companies waived their variable conversation because of the challenging environment while others reduced fixed compensation.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "It also completed its first-ever Scope 3 emissions inventory in 2020, which revealed that the company's total value chain emissions are approximately 2.5 times greater than those arising from their direct operations.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "For example, we completed a heat integration project at one plant at our Antwerp site (6,000 t CO2 emissions reduction).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Exhibit M.6 provides preliminary estimates of absolute emissions and carbon footprint for BlackRock\u2019s AUM in corporate securities and real estate (where data was available).",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We offer our customers innovative solutions combined with practical, down-to-earth advice to support them in the efficient and safe production of high-quality crops over the long term.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "They can be either naturally occurring or caused by humans (such as CO2 emissions generated by burning fossil fuels).",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "FAO data on average income levels for farmers across developing countries clearly show the financial challenge that small-scale farmers will face if they have to change their business model.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Overhead spend (e.g. fuel and electricity costs, carbon tax) increases as a result of global vehicle and non-transport fuel pricing.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Lazard is investing in technology and resources to optimize global transportation tracking and monitoring across air, car and hotel reservations.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "GTN initiatives include efforts to reduce single-use plastic, reduce paper use and waste, plant trees, and support biodiversity in communities.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "It helps us reduce our environmental impact and improve material and energy efficiency across our own operations, product use-time and take-back, and through to our suppliers.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We leverage our financial capabilities to assist companies seeking to deploy technologies that help reduce greenhouse gas (GHG) emissions, manage the risks and opportunities that are emerging from the transition to a lower-carbon economy, and strengthen resilience and adaptation to climate change.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The same methodologies were applied to calculate S3C15 for BlackRock\u2019s seed and co-investment portfolios.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We have used up to 10 years of reported carbon emissions for each stock as the key indicator of alignment (adjusted for where the stock sits with respect to the average in the sector).",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We are not aware of any significant incidents of this type at a local level during 2019.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Under our \u2018Disorderly\u2019 scenario this increases to 3 gigatonnes BECCS (biofuels and hydrogen) and 9 gigatonnes CCS (industry and power generation) by 2050, which we believe is a plausible maximum.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We have set Group balance sheet carbon intensity targets to monitor alignment with the \u2018Paris\u2019 objective and will reduce our portfolio carbon emission intensity by half by 2030 and targeting net zero by 2050.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In addition to working to expand the pipeline of black employees joining the firm, the program supports career advancement of black employees by providing resources, developing a strong internal community of support and increasing opportunities to progress to senior leadership positions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The overstatement was caused by an inaccurate conversion factor for calculating the CO2 emission for heating and cooling in the Netherlands.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "When incomplete, this data can be completed with estimates (e.g. if an issuer has published its carbon footprint but excluded a segment of its business, Trucost estimates the GHG emissions produced by this segment in proportion to the revenue generated).",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The carbon footprint in 2020 was 58 tons of CO2e per million dollars of AUM, down from 73 tons per million dollars of AUM in 2019.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Agricultural films protect and incubate crops, films and bags protect animal feed.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The impairment loss would be measured as the amount by which the carrying amount of the asset exceeds its recoverable amount, which is the higher of the discounted cash flows from the continued use and eventual disposition of the asset or asset group or the net selling price at disposition.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "JPMorgan Chase provides structuring and advisory services that support the development of businesses and financing vehicles intended to create positive environmental and social impacts alongside financial returns.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "This is because in our analysis, we assume that if a significant low carbon transition occurs, this will reduce the potential magnitude of physical climate risks over the long-term.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We will continue to manage and reduce the carbon from our operational footprint through identifying efficiencies and improvements in technology, increasing the consumption of onsite and offsite renewable energy, designing",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "LGIM Real Assets will reduce the operational carbon and energy intensity of our landlord-controlled areas (Scope 1 and 2 emissions) by 60% by 2030.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The project will reduce energy use and greenhouse gas emissions by up to 20% versus conventional technology.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "M&G is helping the UK to move to cleaner forms of transport through its investments in new battery technology and electric vehicles.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The Strategy Committee met once in 2018.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Alongside this, the Group is working to reduce the load of the energy-intensive equipment (air conditioning, heated windscreen, lighting, etc.).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We have also reduced air travel per employee by 21% as of year-end 2019.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "However, using estimated data reduces the reliability of the metrics since estimated emissions may not accurately reflect the actual emissions of any given company.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We estimate the cost of each country\u2019s carbon footprint by using consistent assumptions for the cost of carbon across countries.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "BlackRock believes this is a problematic outcome that would lead to confusion and reduce the comparability and usability of S3C15 data across financial institutions.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Specifically, we have further tightened our exclusion policies in relation to thermal coal production and use, and in relation to tobacco (the latter a reflection of having signed the Tobacco-Free Finance Pledge).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We continue to develop investment solutions which seek to support the low-carbon transition and are constructing active and index portfolios with embedded climate objectives, which include defined decarbonisation targets and \u2018Paris-Alignment\u2019 objectives.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Changes in client preferences and/or changes to regulation to which its clients are subject could reduce demand for certain investment products offered by BlackRock.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The nature of the commitments made by companies on our two priority societal issues (the energy transition and social cohesion) and the existence of positive momentum on these issues will over time be reflected in our voting decisions.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "When applied to the \u00a393 billion of assets in this analysis, this gives a carbon footprint of 11.0 million tonnes of CO2 emissions.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "In addition to managing risk across our client activities and related balance sheet exposure and reputational risk, we continue to adopt best practices to reduce our own carbon footprint and integrate resiliency into our global operations.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We have the power to reduce or even sell out of a holding if engagement is unsuccessful, or the option to avoid investing at all.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We have set Group balance sheet carbon intensity targets to monitor alignment with the Paris objective and will reduce our portfolio carbon emission intensity by half by 2030 and targeting net zero by 2050.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "While BlackRock believes that absolute emissions and carbon footprint are an appropriate starting point for its firm-level reporting of climate-related and portfolio alignment metrics, it is worth noting that these metrics are backward-looking in that that they only consider past emissions of investees.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The EPF also includes environmental and social risk guidelines, including for carbon-intensive sectors.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Because our company is no exception when it comes to generating greenhouse gases, we aim to reduce these emissions in order to mitigate our impact on the climate.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The Group reviews its long-lived assets for impairment whenever events or changes in circumstances indicate that the carrying amount of an asset or asset group may not be recoverable.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "This might lead to reshaped agricultural trading patterns, food supply and global markets.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "In production, the Group is continually improving its processes to reduce the amount of waste and increase recycling.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The priorities of our BRGs include business solutions, recruiting, professional development, marketplace recognition, community outreach, and education and awareness.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Through our global travel program, we are expanding our ability to monitor and report on indirect Scope 3 GHG emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "At this time, Rio Tinto does not appear to be in a position to set meaningful targets to reduce Scope 3 emissions, so we decided it was too early to support the binding shareholder proposal.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "This is in addition to energy data (primarily consumption of combustible fuels, electricity and vehicle fuel) emissions for this Scope 3 category also include emissions of refrigerant gases at supplier premises.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "This included a $934 million green bond issued by Washington State\u2019s Central Puget Sound Regional Transit Authority in 2015 \u2013 the largest municipal green bond issuance to date \u2013 to finance rail and bus transit and related infrastructure to support sustainable transportation.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We also joined the Net-Zero Banking Alliance (NZBA), in which we committed to quantify and report financed emissions, reach net zero before 2050 and set interim targets to reduce these emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our retirement businesses, covering 90% of our Group\u2019s proprietary assets, have committed to reduce portfolio carbon emission intensity by 18.5% by 2025 as part of a wider ESG policy.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Research shows that recycling a metric ton of plastic can reduce carbon emissions by 1-3 metric tons of carbon dioxide equivalents, compared to virgin plastic production.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Furthermore, a slowdown in the trajectory towards herd immunity as a result of risks relating to vaccine logistics, vaccine side effects, reduced effectiveness, or public resistance to (mandatory) vaccination, may have a negative impact on markets.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The aim of these measures is to further enhance KBC\u2019 s positive impact and reduce its negative impact, while facilitating the necessary transition in the power sector.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Amongst other changes in 2020, we developed our approaches on engagement and voting to more fully reinforce our two key ESG priorities of climate change (the energy transition and the need to protect ecosystems), and social cohesion and fairness to the workforce.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our commitment to source renewable energy for 100% of the Firm\u2019s global power needs by 2020 is a major step in our long-standing efforts to reduce our carbon footprint.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "From 2030, our operational footprint (occupied offices and business travel) will operate with net zero carbon emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our current portfolio temperature alignment is above the \u2018Paris\u2019 (1.5\u00b0C) target but at this point in the energy transition this is not surprising.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "BlackRock is funding and partnering with Generation\u2019s country operations in the US, UK, France, Italy, Spain, and India to help them scale their programs and place many more people into growth sectors that are compatible with a sustainable, low-carbon economy, including green jobs opportunities.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We will highlight the current reasons why a shift in food production and consumption toward a more sustainable system is needed; however, it is important to understand that, if unaddressed, these challenges will significantly worsen in the future, partly because of the potential demographic changes that the world is likely to experience this century.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "These methodological choices had a minimal impact on absolute emissions and carbon footprint estimates for the firm given that the majority of BlackRock\u2019s AUM is held in long-only index portfolios where short positions and derivatives are not a significant component of the investment strategy.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Apeel uses ingredients for its products that are plant-based and exist in the peels, seeds and pulp of all fruits and vegetables.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We improved youth HIV therapy and reduced infections in Africa by expanding the New Horizons Collaborative; and we reached over one million adolescent girls and young women through our partnership with DREAMS.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "CMP and EMP2 have been designed and optimised to limit CO2 emissions by leveraging all of the factors that contribute to lower consumption.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The extent of this challenge requires governments, companies, and individuals to participate in the transition to a low-carbon economy.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We do our best to prevent detrimental emissions into the air, water and soil.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "\u201cPlaces\u201d includes actions to reduce emissions and across our global office estate and transport.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "This is an area where we see potential for technology advancements in terms of barrier properties (including the increased use of bio-based and recycled material), packaging line automation and the use of clean technology in packaging lines.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "To allocate Scope 1 emissions to a client, corporate total Scope 1 emissions are multiplied by the ratio of the client\u2019s spend with us versus our total revenue.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Trane\u2019s ThermoKing solutions are used in truck/ trailer transportation (North America Trailer generates approximately 25% of Thermo King revenues), including marine, air, bus, and rail.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Utilized waste includes waste that has been either reused, recycled, or the energy from it has been utilized.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Our risk management efforts are informed and strengthened by our participation in various industry dialogues focused on environmental and human rights issues, such as the Organization for Economic Co-operation and Development advisory group on Responsible Business Conduct in the Financial Sector, as well as by certain internationally recognized principles, including the Equator Principles, Carbon Principles and Green Bond Principles.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In July 2019, we became a signatory of FAIRR, an innovative peer network for institutional investors, who use their influence to help global livestock, fish and dairy companies change their behaviour and build a more sustainable global food system.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "To achieve these targets, BlackRock\u2019s focus will continue to be on increasing energy efficiency, maintaining its 100% renewable electricity goal, and supporting the development of new technologies that can help reduce emissions such as sustainable aviation fuel (\u201cSAF\u201d).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our Global Real Estate division has primary responsibility for managing the sustainability of our physical operations, including setting emissions-reduction targets, implementing energy and water efficiency programs and overseeing recycling efforts and other green building management programs (see sidebar).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The second initiative, which is notably required for a large-scale recycling of the pens, was the launch in 2020 of a pilot take-back programme to effectively collect used pens.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Continued partnerships with two co-ops in Brazil and one in India to advance material recovery and recycling efforts.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Areas of focus in our climate transition activity include clean energy, sustainable transport, sustainable food and agriculture, waste and material, as well as ecosystem services \u2014 areas where we can help scale technology and solutions through greater and more efficient capital deployment.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our data centers consume 75% less energy than the typical enterprise data center does for cooling and electrical support.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Following the example of product strategy, which focuses on developing low-carbon vehicles, the Industrial Department\u2019s environmental policy is committed to supporting the Group\u2019s efforts to reduce its carbon footprint.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Managers also work with employees to support career advancement and development through ongoing feedback.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "This leaves land grabbers free to enter illegally and plan illegal deforestation, which contributes to climate change.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "As a large UK housebuilder, we will enable all new homes we build from 2030 to operate with net zero carbon emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The types of energy included in the reductions are electricity, district cooling, district heat, natural gas.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "If food is not eaten it does not mean that it cannot be re-used in a circular approach where food waste is used as ingredients for new food or beverage products.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The workforce composition by age, gender and professional level is substantially unchanged compared to 2017.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "An observation from this market is that the carbon emissions reported from project financing and leasehold management entities have low Scope 1 and 2 emissions, with expected larger Scope 3 emissions not currently reported.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "For several years, Groupe PSA has undertaken a policy to optimise employee mobility and reduce CO2 emissions related to business travel.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "For ESG-related incidents that destroy shareholder value, weak governance and a lack of ESG transparency has often been a common denominator, underscoring the importance of having the right people, policies and culture in place.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We did not report Scope 2 emissions using the market-based method prior to 2017.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "In early 2020 the Group added \u2018addressing climate change\u2019 as one of our six strategic growth drivers, emphasising the importance of climate risk and the opportunities arising from the necessary energy transition.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Clear policy signals from governments will help to support our efforts to provide the capital needed to facilitate the transition to a low-carbon economy.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We provided seed funding for CFE\u2019s Bank On 2.0 initiative, which is designed to scale up city-based efforts to expand access to safe and affordable banking products and services.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our approach combines on-site power generation, power purchase agreements, renewable energy credits and carbon offsets.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Part of our risk management strategy is to develop investment solutions which support the low-carbon transition.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "BlackRock achieved its 100% renewable electricity goal to match the same amount of renewable electricity as the electricity that our global operations (including data centers) consume annually.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our decarbonization strategy will comprise a combination of approaches, including carbon reduction targets for portfolios where possible, investment in climate solutions, and engagement with companies and policymakers.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Nevertheless, the progress plans implemented in the plants encourage actions to reduce the main sources of energy consumption.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In Brazil, the Group has partnerships with the Petrobras gasoline eum Group which aims to cut CO2 emissions by optimising combustion based on local fuels and biofuels; the S\u00e3o Paulo State organisation FAPESP (Funda\u00e7\u00e3o de Amparo a Pesquisa do Estado de S\u00e3o Paulo); and four universities.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Hence, as a protein source, Solein\u2019s emission intensity is just 1% of that of traditional meat protein and even 80% lower than that of plant-based protein products such as soy or peas.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We are not aware of any significant incidents of these types reported at a local level during 2019.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Several Scope 3 categories declined significantly in 2020, most notably, business travel.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We do not directly control assets under management, but we provide appropriate low-carbon products, engage with shareholders, provide ESG assessments for investee companies and vote on companies\u2019 climate change resolutions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "DWS has piloted ESG Key Performance Indicators, for example on CO2 emissions and information on climate change indicators of a fund, to give investors transparency on the ESG contributions of the DWS Invest SDG Global Equities fund.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our European Impact Property Fund (EIPF), launched in 2020, is the first real estate fund to target CO2 emissions reduction in line with the Paris Agreement.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "By contrast, this figure is less than 10% across Africa and Asia, while 85%\u201395% of farmers in South and Southeast Asia and Africa are small-scale and not likely to be digitally connected, operate in riskier environments or have to rely on lower endowments.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Additionally, PG lacks a comprehensive plan to mitigate exposure to deforestation and forest degradation throughout its operations; its current sourcing policies allow the Company to source from critical ecosystems.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Our key input is the TruCost carbon dataset that covers 15,000 companies.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "In 2021, BlackRock launched eight funds within its Core Fundamental Sustainable Equity range, which aims to deliver long-term outperformance with measurable sustainable outcomes, specifically better ESG scores and lower carbon emissions versus benchmarks.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "With this as a contributing factor, the GIA downgraded the company and several investors reduced or eliminated positions.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "If we fail to see progress, we will reduce our positions or sell our holdings in companies completely.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We also work with this group and with our fleet management personnel to identify vehicles that are under our operational control for inclusion in the inventory.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "This proportion is expected to reduce over time due to enhanced new business underwriting controls.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The ingredient, which can be added to drinks, baked goods and other products, also helps coffee farmers increase incomes.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The \u2018non-operating\u2019 result relates to seeding portfolios, interest and foreign exchange charges.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Regular crop residue burning by the farmers generates significant amounts of airborne ash at Stride\u2019s Punjab site, reducing the air quality, increasing greenhouse gas emissions and the risk of onsite fire.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "And because we know we have more to do, in late 2018, I asked a group of senior executives from across the Firm to work together to develop strategies to expand our efforts with respect to low-carbon business opportunities, policy engagement and climate risk management.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The increase in 2020 is due to the exceptional disposal of vehicles and Company cars.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "By choosing open- plan office concepts, the office space occupied is reduced and lower energy consumption is the result.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "BlackRock is committed to achieving its science-aligned emissions reduction targets and strives to operate as efficiently as possible and by leveraging less carbon intensive energies, such as renewable electricity and sustainable aviation fuel (\u201cSAF\u201d).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We also work with our fleet management team to identify vehicles that are under our operational control for inclusion in the inventory.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "GTN championed an educational campaign highlighting ways employees can reduce their plastic use.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We introduced our Helping hands employee engagement volunteering program on a global level, which will hopefully provide a more systematic approach and some financial support for smaller local community programs.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In May 2019, we launched our Helping Hands volunteering and engagement program for employees.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "BofA engages with food services vendors to reduce red meat consumption, increase vegetarian options, increase the amount of spend on local produce (defined as within 400 miles of a BofA caf\u00e9), reduce food waste, and donate food when possible.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The outlined changes to our fossil fuel policies announced in July 2020 underline our aspiration to contribute to climate protection and to the goal of the European Union to become net-zero-carbon by 2050.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "A change in legislation, regulations or made by government, regulatory and/ or industry bodies may increase the costs of operating a business, reduce the attractiveness of an investment, or change the competitive landscape.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Putting a price tag on these extra CO2 emissions of USD 186.8 per ton of CO2 equivalents results in additional yearly costs of USD 329.1 billion between 2020 and 2035 (in 2010 US dollars).",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Together, BlackRock and Temasek have committed $600 million to invest in companies and proven technologies that could reduce and potentially eliminate carbon emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Our capital investment business invests their own capital to generate attractive returns and support the transition to a low-carbon economy.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "These include onsite services, environmental performance, proximity to public transport, and building adaptability and accessibility.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Such average aged vehicles date back to outdated Euro 4 emission standards and many vehicles are even older.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We have analysed \u00a335 billion of listed assets (including government bonds), out of our \u00a395 billion of Group proprietary assets, where we have the relevant carbon data.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We have renewed and broadened our Climate Impact Pledge to spur net zero carbon emissions globally by 2050 through engagement with meaningful consequences, both through our voting activity and through our investment management business\u2019s capital allocation.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "To further strengthen its commitment to ESG in real estate investments, DWS aims at halving carbon emissions by 2030 against the reference year 2017 for its entire portfolio of European office properties held by funds managed by the European real estate business.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Based on the mix between small- and large- scale farmers across regions, we are not surprised to find that small-scale farming makes up more than 50% of total food production across developing countries, whereas this figure is just 3% for high-income regions according to the International Food Policy Research Institute (IFPRI, Figure 3).",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "For equity investments, estimation of the recoverable value (impairment test) is done only when there is objective evidence of a decrease in value such as to compromise the recoverability of the investment.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "In reducing the single use of plastics, we found that most companies were able to show good progress on three engagement objectives \u2013 innovation, responsible lobbying, and industry collaboration and partnerships \u2013 but were lacking progress regarding recycling and plastic harmonization.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "A chaotropic agent is a molecule in water solution that can disrupt the hydrogen bonding network between water molecules.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Goldman Sachs is committed to continuing our work with various stakeholders, including clients, shareholders, peer banks and other key constituents to improve methodologies on climate-related risk analysis and disclosures and to furthering climate-related opportunities to facilitate the transition to a sustainable low-carbon economy.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "CO2 emissions \u2013 in office buildings or from business travel \u2013 have been reduced from 750,000 tonnes to around 360,000 tonnes since 2007.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Specific to climate change, we are incorporating analysis of climate-related risks and also offering strategies that capitalize on the transition to a lower-carbon economy.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The Group therefore positions itself as a key player in the low-CO2 emissions segment.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "This product is easy to install and is another way to help with food spoilage and foster sustainability.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "They are recharging the groundwater and therefore building up the water table, which has further resulted in a healthy crop, increased the income of farmers, and enhanced the livelihoods of rural households.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Regarding representation of the different age brackets for members of the governance bodies, considering these to include the BoD, Board of Statutory Auditors and SB, it is noted that 44% of members are in the 30-50 years bracket, and the remaining 56% are in the over-50 bracket.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We support the personal and professional development of all employees in line with their strengths, ambitions and competencies, thereby laying the groundwork for an enriching and challenging career with our company.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "As of year-end 2020, BlackRock had reduced Scope 1 and 2 (location-based) emissions by 32% from a 2014 baseline despite a 47% increase in headcount and a 37% increase in square footage over the same period.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In advance of the Conference, we updated our Framework to articulate our view on the importance of government policy that incentivizes innovation and investment in low-carbon and energy-efficient technologies.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "SMEs are defined as companies having capital of not more than \u00a5300 million (\u00a5100 million in wholesale, and \u00a550 million in retail,food service and leasing business categories), or companies with not more than 300 full-time employees (100 in wholesale and leasing, 50 in retail and food service business categories), etc.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "By using its low-emission vehicles, Groupe PSA estimates that 223 Mt of CO2 will be avoided in the world over a 13-year period (2012-2025).",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "BlackRock\u2019s Real Assets investment team manages approximately $13.7 billion of invested and committed capital supporting over 350 wind, solar, and electric vehicles infrastructure projects globally.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The first consists of recycling pens discarded after production; it is now looking into how to scale-up the solution so it can be applied to used insulin pens.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In addition, BlackRock announced a partnership with Temasek to focus on investments that advance decarbonization solutions through late-stage venture capital and early growth private equity investment funds.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "This consisted of 1.33 tonnes of post-consumer plastic waste \u2013 the equivalent of 55,415 500ml plastic bottles or 3,166,666 single-use plastic drinking straws.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "For a better understanding of the contributing factors, we have disaggregated the total costs of malnutrition into three components: the economic costs of undernutrition, the economic costs of overweight and obesity, and the social costs in conjunction with a higher carbon footprint.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "By using a combination of these benchmarks, we establish an estimate of the carbon emissions associated with our direct property investments and also identify which property sectors are on average most intensive in terms of carbon emissions.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "We are a large-scale institutional investor in assets, or custodian of others assets, whose value may be affected by direct and indirect impacts from climate change and by the transition to a low-carbon economy.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "An alternative approach, weighting the stocks by carbon values, is also in development.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Climate hazards used in the assessment are: riverinefood, surface waterfood, coastal inundation, heat, forest fire, wind damage, soil movement and freeze-thaw.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Ninety years ago, M&G started to help cities improve their infrastructure: our long-term investment capabilities mean we are very well placed to support the energy transition today.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "This TCFD report marks the first time that BlackRock is reporting preliminary estimates reflecting the absolute emissions and the carbon footprint associated with BlackRock\u2019s AUM in corporate securities and real estate.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Environmental attribute certificates (\u201cEACs\u201d), also known as renewable energy certificates (\u201cRECs\u201d) in the US, are tradeable instruments that represent the legal rights to the environmental attributes of one megawatt-hour (\u201cMWh\u201d) of renewable electricity generation.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "In 2020, emissions for commuting and business travel were greatly reduced due to the restrictions caused by the Covid-19 pandemic, which limited movements and led to quick switchover to remote working for the majority of employees.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The Board of Statutory Auditors is not currently granted powers pursuant to art. 6.1 b, Italian Legislative Decree no. 231/2001; Banco BPM Banking Group\u2019s Board of Directors, in their meeting on 10 January 2017, considering not to make use of the authorities laid out in paragraph 4-bis of the same article mentioned above, in fact it appointed a specific Supervisory Body (SB), assigned the task of monitoring, among other things, the observance and functioning of the organisational, management and monitoring model, and also of updating of the consequent powers and duties.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The LGIM Real Assets business will reduce the operational carbon and energy intensity of our landlord-controlled areas (Scope 1 and 2 emissions) by 60% by 2030 and will establish Science Based Targets (SBTs) for our wider Scope 3 emissions during 2021, as part of our wider Real Assets Net Zero Roadmap.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Valuation allowances are provided for the portion of tax loss carryforwards that are judged not to be recoverable.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "Catalyst\u2019s initial focus will be to help speed the development and commercialization of four clean energy technologies: direct air capture, green hydrogen, sustainable aviation fuel, and long-duration energy storage.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "The wide range of estimates for social costs \u2013 ranging from single-digit USD figures to three hundredfold \u2013 reflects the uncertainties surrounding CO2 emissions, their costs to the climate and the choice of decision variables.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The increase was mainly due to the tax loss carryforwards assessed as not recoverable.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The expenses and income shown in other comprehensive income are divided into two categories: Items that will be recognized in the income statement in the future (known as \u201crecycling\u201d) and items that will not be reclassified to the income statement in the future.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The reduction relates to reduced business travel and reductions in carbon emissions from the management of our Real Assets but includes our growing construction footprint and a slight increase in our operational office footprint.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "In 2019, we reduced the use of new packaging materials by 3 200 metric tons (4 200 in 2018) through the reuse of transportation packaging.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "A significant decline is regarded as an other-than- temporary decline unless the significant decline is reasonably recoverable.",
+    "label": "unsustainable"
+  },
+  {
+    "sentence": "The company produces lab-grown, cultivated, meat, which eliminates the need to slaughter animals and strongly reduces land and water requirements as well as greenhouse gas emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "We have reduced our energy use by 45% and our location-based GHG emissions by 60%, sourced 100% renewable electricity, and purchased and retired high quality, certified carbon offsets for unavoidable emissions.",
+    "label": "sustainable"
+  },
+  {
+    "sentence": "Star America Infrastructure Partners operates in particular through public-private partnerships in four asset categories: transport, social infrastructure, environment and communication.",
+    "label": "sustainable"
+  }
+]
