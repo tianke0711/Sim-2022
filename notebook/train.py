@@ -103,7 +103,7 @@ def cross_valid(train_path, test_path, batch_size, n_splits, maxlen):
         valid_temp = InputDataSet(data, tokenizer, maxlen)
         valid_iter = DataLoader(valid_temp, batch_size=batch_size, num_workers=0)
         valid_iter_list.append(valid_iter)
-    test_data = TestInput(test, tokenizer, maxlen)
+    test_data = InputDataSet(test, tokenizer, maxlen)
     test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
     return train_iter_list, valid_iter_list, test_iter
 
@@ -224,12 +224,12 @@ def train(epochs, info_name, choice):
                 torch.save(model.state_dict(), output_model_file)
                 print(f"Model Save!, Loss: {avg_val_loss}")
 
-        # _, _, _, lst_prob, lst_true = my_prediction(model, test_iter, info_name, choice=params["choice"])
-        lst_prob = my_prediction(model, test_iter, info_name, choice=params["choice"])
+        _, _, _, lst_prob, lst_true = my_prediction(model, test_iter, info_name, choice=params["choice"])
+        # lst_prob = my_prediction(model, test_iter, info_name, choice=params["choice"])
         k_result.append(lst_prob)
-        # true_label = lst_true
+        true_label = lst_true
 
-    real_prediction(k_result)
+    avg_prediction(k_result, true_label, params['test_path'])
 
     cache_info(final_file, f"Total train time: {format_time(time.time() - start_time)}")
 
@@ -275,9 +275,9 @@ if __name__ == "__main__":
     params = {
         "batch_size": 32,
         "LR": 2e-05,
-        "train_path": '../data/train_idx2.csv',
+        "train_path": '../data/train_idx.csv',
         "valid_path": '../data/val_idx2.csv',
-        "test_path": '../data/real_test.csv',
+        "test_path": '../data/test_idx.csv',
         "epochs": 5,
         "choice": 'ALBERT',
         "n_splits": 5,
