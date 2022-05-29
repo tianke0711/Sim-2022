@@ -20,6 +20,13 @@
 - **Sustainability_sentences_result** 最终测试结果文件
 - **real_label**                      预测Sustainability_sentences_test.json的label
 - **real_test**                       读取Sustainability_sentences_test.json的text
+- **BERT_real_label**                 BERT模型预测出的标签
+- **BERT_large_real_label**           BERT_large模型预测出的标签
+- **ALBERT_real_label**               ALBERT模型预测出的标签
+- **dBERT_real_label**                DistillBERT模型预测出的标签
+- **RoBERTa_real_label**              RoBERTa模型预测出的标签
+- **final_label**                     五个模型投票出的最终预测标签
+- **Sustainability_sentences_final_result** 投票法的最终测试结果文件
 
 ## 文档部分 -- document文件夹下
 - **config**                          存储每次运行的参数信息
