@@ -54,6 +54,7 @@ class ALBertForSeq(AlbertPreTrainedModel):
         )
 
         pooler_output = outputs[1]
+        # pooler_output = pooler_output[:, 0]
         pooler_output = self.dropout(pooler_output)
 
         logits = self.classifier(pooler_output)
@@ -85,6 +86,7 @@ class RoBERTaForSeq(RobertaPreTrainedModel):
         self.dropout = nn.Dropout(config.hidden_dropout_prob)
 
         self.classifier = nn.Linear(config.hidden_size, self.num_labels)
+        self.relu = nn.ReLU()
 
         self.init_weights()
 
@@ -99,10 +101,12 @@ class RoBERTaForSeq(RobertaPreTrainedModel):
             return_dict=return_dict
         )
 
-        pooler_output = outputs[1]
+        pooler_output = outputs[0]
+        pooler_output = pooler_output[:, 0]
         pooler_output = self.dropout(pooler_output)
 
         logits = self.classifier(pooler_output)
+        logits = self.relu(logits)
         loss = None
 
         if labels is not None:

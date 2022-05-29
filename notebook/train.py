@@ -26,8 +26,8 @@ from transformers import logging
 from sklearn.model_selection import KFold
 
 # my file
-from process_file import ALBERTInputDataSet, TestInput, RoBERTaInputDataSet
-from prediction import my_prediction, avg_prediction
+from process_file import InputDataSet, TestInput
+from prediction import my_prediction, avg_prediction, real_prediction
 from model import ALBertForSeq, RoBERTaForSeq
 
 logging.set_verbosity_error()
@@ -81,7 +81,7 @@ def data_init(train_path, valid_path, test_path, batch_size, choice='RoBERTa'):
         return train_iter, val_iter, test_iter
 
 
-def cross_valid(train_path, test_path, batch_size, n_splits):
+def cross_valid(train_path, test_path, batch_size, n_splits, maxlen):
     train = pd.read_csv(train_path)
     test = pd.read_csv(test_path)
     kf = KFold(n_splits=n_splits, shuffle=True, random_state=6)
@@ -95,18 +95,15 @@ def cross_valid(train_path, test_path, batch_size, n_splits):
         valid_data.append(valid_temp)
     train_iter_list = []
     for data in train_data:
-        # train_temp = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
-        train_temp = ALBERTInputDataSet(data, tokenizer, 128)
+        train_temp = InputDataSet(data, tokenizer, maxlen)
         train_iter = DataLoader(train_temp, batch_size=batch_size, num_workers=0)
         train_iter_list.append(train_iter)
     valid_iter_list = []
     for data in valid_data:
-        # valid_temp = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
-        valid_temp = ALBERTInputDataSet(data, tokenizer, 128)
+        valid_temp = InputDataSet(data, tokenizer, maxlen)
         valid_iter = DataLoader(valid_temp, batch_size=batch_size, num_workers=0)
         valid_iter_list.append(valid_iter)
-    # test_data = ALBERTInputDataSet(data, tokenizer, 128) if params["choice"] == "ALBERT" else RoBERTaInputDataSet(data, tokenizer, 128)
-    test_data = ALBERTInputDataSet(data, tokenizer, 128)
+    test_data = InputDataSet(test, tokenizer, maxlen)
     test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
     return train_iter_list, valid_iter_list, test_iter
 
@@ -203,8 +200,6 @@ def train(epochs, info_name, choice):
             for i, batch in enumerate(train_iter):
                 input_ids = batch["input_ids"].cuda()
                 attention_mask = batch["attention_mask"].cuda()
-                token_type_ids = None
-                # if choice == "ALBERT":
                 token_type_ids = batch["token_type_ids"].cuda()
                 labels = batch["labels"].cuda()
 
@@ -230,10 +225,11 @@ def train(epochs, info_name, choice):
                 print(f"Model Save!, Loss: {avg_val_loss}")
 
         _, _, _, lst_prob, lst_true = my_prediction(model, test_iter, info_name, choice=params["choice"])
+        # lst_prob = my_prediction(model, test_iter, info_name, choice=params["choice"])
         k_result.append(lst_prob)
         true_label = lst_true
 
-    avg_prediction(k_result, true_label)
+    avg_prediction(k_result, true_label, params['test_path'])
 
     cache_info(final_file, f"Total train time: {format_time(time.time() - start_time)}")
 
@@ -266,10 +262,10 @@ def evaluate(model, val_iter, choice):
         # total_val_loss += loss.mean().item()
         total_val_loss += loss.item()
 
-        # get avg loss
-        avg_val_loss = total_val_loss / len(val_iter)
-        # get avg acc
-        avg_val_acc = np.mean(corrects)
+    # get avg loss
+    avg_val_loss = total_val_loss / len(val_iter)
+    # get avg acc
+    avg_val_acc = np.mean(corrects)
 
     return avg_val_loss, avg_val_acc
 
@@ -281,10 +277,11 @@ if __name__ == "__main__":
         "LR": 2e-05,
         "train_path": '../data/train_idx.csv',
         "valid_path": '../data/val_idx2.csv',
-        "test_path": '../data/valid_idx.csv',
-        "epochs": 10,
-        "choice": 'RoBERTa',
-        "n_splits": 5
+        "test_path": '../data/test_idx.csv',
+        "epochs": 5,
+        "choice": 'ALBERT',
+        "n_splits": 5,
+        "max_len": 256
     }
     info_name = f"{time.strftime('%Y-%m-%d-%H-%M')}"
     label_to_inx = {'unsustainable': 0, 'sustainable': 1}
@@ -293,7 +290,8 @@ if __name__ == "__main__":
     _, tokenizer = model_init(choice="ALBERT")
     # load data set
     # train_iter, valid_iter, test_iter = data_init(params["train_path"], params["valid_path"], params["test_path"], params["batch_size"], choice=params["choice"])
-    train_iter_list, valid_iter_list, test_iter = cross_valid(params["train_path"], params["test_path"], params["batch_size"], params["n_splits"])
+    train_iter_list, valid_iter_list, test_iter = cross_valid(params["train_path"], params["test_path"],
+                                                              params["batch_size"], params["n_splits"], params["max_len"])
 
     # save config
     save_config(params, info_name)
