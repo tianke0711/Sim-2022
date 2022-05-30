@@ -47,7 +47,7 @@
   {
     "sentence": "With 1,226,000 vehicles produced in France in 2019, Groupe PSA produces more vehicles in France than in any other country.",
     "label": "",
-    "predicted_label": "sustainable"
+    "predicted_label": "unsustainable"
   },
   {
     "sentence": "Every year, we conduct Group-wide confidential and voluntary employee surveys.",
@@ -122,7 +122,7 @@
   {
     "sentence": "It also completed its first-ever Scope 3 emissions inventory in 2020, which revealed that the company's total value chain emissions are approximately 2.5 times greater than those arising from their direct operations.",
     "label": "",
-    "predicted_label": "unsustainable"
+    "predicted_label": "sustainable"
   },
   {
     "sentence": "For example, we completed a heat integration project at one plant at our Antwerp site (6,000 t CO2 emissions reduction).",
@@ -672,7 +672,7 @@
   {
     "sentence": "Additionally, PG lacks a comprehensive plan to mitigate exposure to deforestation and forest degradation throughout its operations; its current sourcing policies allow the Company to source from critical ecosystems.",
     "label": "",
-    "predicted_label": "sustainable"
+    "predicted_label": "unsustainable"
   },
   {
     "sentence": "Our key input is the TruCost carbon dataset that covers 15,000 companies.",
@@ -692,7 +692,7 @@
   {
     "sentence": "If we fail to see progress, we will reduce our positions or sell our holdings in companies completely.",
     "label": "",
-    "predicted_label": "unsustainable"
+    "predicted_label": "sustainable"
   },
   {
     "sentence": "We also work with this group and with our fleet management personnel to identify vehicles that are under our operational control for inclusion in the inventory.",
@@ -997,7 +997,7 @@
   {
     "sentence": "The reduction relates to reduced business travel and reductions in carbon emissions from the management of our Real Assets but includes our growing construction footprint and a slight increase in our operational office footprint.",
     "label": "",
-    "predicted_label": "unsustainable"
+    "predicted_label": "sustainable"
   },
   {
     "sentence": "In 2019, we reduced the use of new packaging materials by 3 200 metric tons (4 200 in 2018) through the reuse of transportation packaging.",

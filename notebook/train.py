@@ -36,7 +36,8 @@ from model_tian import BertClassifier, BertClassifier_large, RobertaClassifier, 
 
 logging.set_verbosity_error()
 
-device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+# device = torch.device("cuda:0") if torch.cuda.is_available() else torch.device("cpu")
+devices = [torch.device(f'cuda:{i}') for i in range(torch.cuda.device_count())]
 
 
 def model_init(choice='RoBERTa'):
@@ -48,9 +49,10 @@ def model_init(choice='RoBERTa'):
     else:
         # model = ALBertForSeq.from_pretrained('albert-base-v2')
         # tokenizer = AlbertTokenizer.from_pretrained('albert-base-v2')
-        tokenizer = DistilBertTokenizer.from_pretrained('distilbert-base-uncased')
+        tokenizer = AlbertTokenizer.from_pretrained('distilbert-base-uncased')
         model = DistillBertClassifier()
-        model = model.cuda()
+        model = nn.DataParallel(model, device_ids=devices)
+        model = model.to(devices[0])
         return model, tokenizer
 
 
@@ -96,18 +98,18 @@ def cross_valid(train_path, test_path, batch_size, n_splits, maxlen):
         valid_data.append(valid_temp)
     train_iter_list = []
     for data in train_data:
-        # train_temp = InputDataSet(data, tokenizer, maxlen)
-        train_temp = Dataset(data, tokenizer)
+        train_temp = InputDataSet(data, tokenizer, maxlen)
+        # train_temp = Dataset(data, tokenizer)
         train_iter = DataLoader(train_temp, batch_size=batch_size, num_workers=0)
         train_iter_list.append(train_iter)
     valid_iter_list = []
     for data in valid_data:
-        # valid_temp = InputDataSet(data, tokenizer, maxlen)
-        valid_temp = Dataset(data, tokenizer)
+        valid_temp = InputDataSet(data, tokenizer, maxlen)
+        # valid_temp = Dataset(data, tokenizer)
         valid_iter = DataLoader(valid_temp, batch_size=batch_size, num_workers=0)
         valid_iter_list.append(valid_iter)
-    # test_data = TestInput(test, tokenizer, maxlen)
-    test_data = TestDataset(test, tokenizer)
+    test_data = TestInput(test, tokenizer, maxlen)
+    # test_data = TestDataset(test, tokenizer)
     test_iter = DataLoader(test_data, batch_size=batch_size, num_workers=0)
     return train_iter_list, valid_iter_list, test_iter
 
@@ -201,10 +203,10 @@ def train(epochs, info_name, choice):
             cache_info(final_file, "")
             cache_info(final_file, f"K: {k}, EPOCH -- {epoch}")
             for i, batch in enumerate(train_iter):
-                input_ids = batch["input_ids"].cuda()
-                attention_mask = batch["attention_mask"].cuda()
-                token_type_ids = batch["token_type_ids"].cuda()
-                labels = batch["labels"].cuda()
+                input_ids = batch["input_ids"].cuda(devices[0])
+                attention_mask = batch["attention_mask"].cuda(devices[0])
+                token_type_ids = batch["token_type_ids"].cuda(devices[0])
+                labels = batch["labels"].cuda(devices[0])
 
                 model.zero_grad()
                 outputs = model(input_ids, attention_mask, token_type_ids, labels)
@@ -266,9 +268,9 @@ def train1(epochs, info_name, choice):
             cache_info(final_file, "")
             cache_info(final_file, f"K: {k}, EPOCH -- {epoch}")
             for i, (train_inputs, train_labels) in enumerate(train_iter):
-                input_ids = train_inputs["input_ids"].squeeze(1).to(device)
-                attention_mask = train_inputs["attention_mask"].to(device)
-                train_labels = train_labels.to(device)
+                input_ids = train_inputs["input_ids"].squeeze(1).to(devices[0])
+                attention_mask = train_inputs["attention_mask"].to(devices[0])
+                train_labels = train_labels.to(devices[0])
                 model.zero_grad()
 
                 outputs = model(input_ids, attention_mask)
@@ -307,10 +309,10 @@ def evaluate(model, val_iter, choice):
     corrects = []
     for batch in val_iter:
         # take each batch from the iterator
-        input_ids = batch["input_ids"].cuda()
-        attention_mask = batch["attention_mask"].cuda()
-        token_type_ids = batch["token_type_ids"].cuda()
-        labels = batch["labels"].cuda()
+        input_ids = batch["input_ids"].cuda(devices[0])
+        attention_mask = batch["attention_mask"].cuda(devices[0])
+        token_type_ids = batch["token_type_ids"].cuda(devices[0])
+        labels = batch["labels"].cuda(devices[0])
 
         # the outputs of the validation set are not involved in the subsequent gradient calculation of the training set
         with torch.no_grad():
@@ -345,9 +347,9 @@ def evaluate1(model, val_iter, choice):
     corrects = []
     for val_inputs, val_labels in val_iter:
         # take each batch from the iterator
-        input_ids = val_inputs["input_ids"].squeeze(1).to(device)
-        attention_mask = val_inputs["attention_mask"].to(device)
-        val_labels = val_labels.to(device)
+        input_ids = val_inputs["input_ids"].squeeze(1).to(devices[0])
+        attention_mask = val_inputs["attention_mask"].to(devices[0])
+        val_labels = val_labels.to(devices[0])
 
         # the outputs of the validation set are not involved in the subsequent gradient calculation of the training set
         with torch.no_grad():
@@ -378,12 +380,12 @@ def evaluate1(model, val_iter, choice):
 if __name__ == "__main__":
     # init params section
     params = {
-        "batch_size": 8,
-        "LR": 2e-05,
-        "train_path": '../data/train_idx2.csv',
+        "batch_size": 32,
+        "LR": 1e-06,
+        "train_path": '../data/total_idx.csv',
         "valid_path": '../data/val_idx2.csv',
         "test_path": '../data/real_test.csv',
-        "epochs": 5,
+        "epochs": 20,
         "choice": 'ALBERT',
         "n_splits": 5,
         "max_len": 256

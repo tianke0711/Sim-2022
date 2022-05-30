@@ -149,7 +149,7 @@ def real_prediction(k_result):
     # df.to_csv("../data/BERT_probs.csv")
 
     df1 = pd.DataFrame(avg_preds, columns=['label'])
-    df1.to_csv('../data/dBERT_real_label.csv')
+    df1.to_csv('../data/ALBERT_real_label.csv')
     print("over!")
 
 
